@@ -4,12 +4,24 @@ fetch('https://gist.githubusercontent.com/josejbocanegra/b1873c6b7e732144355bb16
     eventos=data;
     let tabEven="";
     eventos.forEach((prov,index) => {
-        let msg="<tr> \n";
-        msg+="<th scope=\"row\">"+index+"</th> \n";
-        msg+="<td>"+prov.events+"</td> \n";
-        msg+="<td>"+prov.squirrel+"</td>\n";
-        msg+="</tr> \n";
-        tabEven+=msg;
+        if(prov.squirrel===true)
+        {
+            let msg="<tr class='squi'> \n";
+            msg+="<th scope=\"row\">"+index+"</th> \n";
+            msg+="<td>"+prov.events+"</td> \n";
+            msg+="<td>"+prov.squirrel+"</td>\n";
+            msg+="</tr> \n";
+            tabEven+=msg;
+        }
+        else
+        {
+            let msg="<tr> \n";
+            msg+="<th scope=\"row\">"+index+"</th> \n";
+            msg+="<td>"+prov.events+"</td> \n";
+            msg+="<td>"+prov.squirrel+"</td>\n";
+            msg+="</tr> \n";
+            tabEven+=msg;
+        }
     });
     
     let rep1= document.getElementById("replace1");
