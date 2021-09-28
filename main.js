@@ -11,8 +11,9 @@ fetch('https://gist.githubusercontent.com/josejbocanegra/b1873c6b7e732144355bb16
     let allMcc=[];
     let totalDias=0;
     let totalSqui=0;
-    let tabEven="";
-    let tabCor="";
+    let rep1= document.getElementById("replace1");
+    let rep2= document.getElementById("replace2");
+
     dias.forEach((dia,index) => {
         totalDias++;
         if(dia.squirrel===true)
@@ -33,12 +34,18 @@ fetch('https://gist.githubusercontent.com/josejbocanegra/b1873c6b7e732144355bb16
                 numEvents[ind]++;
                 tps[ind]++;
             })
-            let msg="<tr class='squi'> \n";
-            msg+="<th scope=\"row\">"+index+"</th> \n";
-            msg+="<td>"+dia.events+"</td> \n";
-            msg+="<td>"+dia.squirrel+"</td>\n";
-            msg+="</tr> \n";
-            tabEven+=msg;
+            let row = document.createElement("tr");
+            row.className="squi";
+            let ind = document.createElement("td");
+            ind.innerHTML=index+1;
+            row.appendChild(ind);
+            let atrvals=Object.values(dia);
+            atrvals.forEach((act)=>{
+                let elem = document.createElement("td");
+                elem.innerHTML=act;
+                row.appendChild(elem);
+            })
+            rep1.appendChild(row);
         }
         else
         {
@@ -57,12 +64,17 @@ fetch('https://gist.githubusercontent.com/josejbocanegra/b1873c6b7e732144355bb16
                 numEvents[ind]++;
                 fns[ind]++;
             })
-            let msg="<tr> \n";
-            msg+="<th scope=\"row\">"+(index+1)+"</th> \n";
-            msg+="<td>"+dia.events+"</td> \n";
-            msg+="<td>"+dia.squirrel+"</td>\n";
-            msg+="</tr> \n";
-            tabEven+=msg;
+            let row = document.createElement("tr");
+            let ind = document.createElement("td");
+            row.appendChild(ind);
+            ind.innerHTML=index+1;
+            let atrvals=Object.values(dia);
+            atrvals.forEach((act)=>{
+                let elem = document.createElement("td");
+                elem.innerHTML=act;
+                row.appendChild(elem);
+            })
+            rep1.appendChild(row);
         }
     });
 
@@ -100,17 +112,15 @@ fetch('https://gist.githubusercontent.com/josejbocanegra/b1873c6b7e732144355bb16
         });
         allMcc.forEach((x,index)=>
         {
-            let msg2="<tr> \n";
-            msg2+="<th scope=\"row\">"+(index+1)+"</th> \n";
-            msg2+="<td>"+x[0]+"</td> \n";
-            msg2+="<td>"+x[1]+"</td>\n";
-            msg2+="</tr> \n";
-            tabCor+=msg2;
+            let row = document.createElement("tr");
+            let ind = document.createElement("td");
+            ind.innerHTML=index+1;
+            row.appendChild(ind);
+            x.forEach((act)=>{
+                let elem = document.createElement("td");
+                elem.innerHTML=act;
+                row.appendChild(elem);
+            })
+            rep2.appendChild(row);
         })
-    
-    let rep1= document.getElementById("replace1");
-    rep1.innerHTML=tabEven;
-
-    let rep2= document.getElementById("replace2");
-    rep2.innerHTML=tabCor;
 });
